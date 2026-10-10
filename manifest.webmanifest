@@ -1,0 +1,16 @@
+{
+  "name": "LOBAR — Mantenimiento de Planta",
+  "short_name": "LOBAR",
+  "description": "Sistema de mantenimiento, incidencias y repuestos — Lobar S.A.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1C2128",
+  "theme_color": "#1C2128",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LOBAR — Sistema de Mantenimiento</title>
+<meta name="theme-color" content="#1C2128">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LOBAR">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -205,7 +213,8 @@ textarea.form-input{resize:vertical;min-height:80px;}
 <body>
 <div id="setup-screen" class="screen" style="display:none">
   <div class="login-card" style="max-width:520px">
-    <div class="login-logo">LOBAR</div>
+    <img src="logo-96.png" alt="LOBAR" style="width:96px;display:block;margin:0 auto 10px;border-radius:18px">
+<div class="login-logo" style="margin-bottom:2px">LOBAR</div>
     <div class="login-sub">Configuración inicial de la base de datos</div>
     <div class="setup-step"><b>1.</b> Creá una cuenta gratis en <code>supabase.com</code> → <b>New project</b> (elegí una contraseña de base de datos y guardala).</div>
     <div class="setup-step"><b>2.</b> En el menú lateral abrí <b>SQL Editor</b> → <b>New query</b>, pegá todo el contenido del archivo <code>supabase_setup.sql</code> y dale <b>RUN</b>.</div>
@@ -216,8 +225,9 @@ textarea.form-input{resize:vertical;min-height:80px;}
 </div>
 <div id="login-screen" class="screen" style="display:none">
   <div class="login-card">
-    <div class="login-logo">LOBAR</div>
-    <div class="login-sub">Sistema de Mantenimiento · Planta Bloquera</div>
+    <img src="logo-96.png" alt="LOBAR" style="width:96px;display:block;margin:0 auto 10px;border-radius:18px">
+<div class="login-logo" style="margin-bottom:2px">LOBAR</div>
+    <div class="login-sub">Sistema de Mantenimiento<br>Planta de Bloques y Adoquines</div>
     <div class="login-err" id="login-err"></div>
     <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="login-email" placeholder="tu@email.com" autocomplete="username"></div>
     <div class="form-group"><label class="form-label">Contraseña</label><input class="form-input" type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password"></div>
@@ -227,6 +237,7 @@ textarea.form-input{resize:vertical;min-height:80px;}
 </div>
 <div id="app">
 <div id="status-bar">
+  <img src="logo-96.png" alt="LOBAR" style="width:34px;height:34px;border-radius:8px;display:block">
   <span class="status-logo">LOBAR</span>
   <div class="status-divider"></div>
   <div class="status-pills" id="status-pills"></div>
@@ -239,7 +250,7 @@ textarea.form-input{resize:vertical;min-height:80px;}
     <div class="nav-section-label">Principal</div>
     <button class="nav-item active" onclick="navigate('dashboard')"><span class="nav-icon">📊</span> Dashboard</button>
     <button class="nav-item" onclick="navigate('alertas')"><span class="nav-icon">🚨</span> Alertas<span class="nav-badge" id="badge-alertas">0</span></button>
-    <button class="nav-item" onclick="navigate('eventos')"><span class="nav-icon">📣</span> Eventos<span class="nav-badge" id="badge-eventos" style="display:none">0</span></button>
+    <button class="nav-item" onclick="navigate('eventos')"><span class="nav-icon">📣</span> Incidencias<span class="nav-badge" id="badge-eventos" style="display:none">0</span></button>
     <div class="nav-section-label">Gestión</div>
     <button class="nav-item" onclick="navigate('equipos')"><span class="nav-icon">🏭</span> Equipos</button>
     <button class="nav-item" onclick="navigate('tareas')"><span class="nav-icon">🔧</span> Tareas</button>
@@ -319,8 +330,8 @@ textarea.form-input{resize:vertical;min-height:80px;}
     </div>
     <div class="page" id="page-eventos">
       <div class="section-hdr">
-        <div><div class="page-title">Eventos de Planta</div><div class="page-sub" style="margin-bottom:0">Paradas, problemas, hallazgos y mejoras con seguimiento</div></div>
-        <button class="btn btn-primary" onclick="openModal('evento')">+ Nuevo Evento</button>
+        <div><div class="page-title">Incidencias de Planta</div><div class="page-sub" style="margin-bottom:0">Paradas, problemas, hallazgos y mejoras con seguimiento</div></div>
+        <button class="btn btn-primary" onclick="openModal('evento')">+ Nueva Incidencia</button>
       </div>
       <div class="tabs">
         <button class="tab-btn active" onclick="filterEventos('todos',this)">Todos</button>
@@ -335,7 +346,7 @@ textarea.form-input{resize:vertical;min-height:80px;}
       <div class="page-sub">Quién hizo qué en el sistema · visible solo para el Jefe de planta</div>
       <div class="cards-grid-4" style="margin-bottom:16px" id="usuarios-kpis"></div>
       <div class="table-wrap">
-        <table><thead><tr><th>Usuario</th><th>Rol</th><th>Tareas completadas</th><th>Eventos reportados</th><th>Seguimientos</th><th>Registros creados</th><th>Última actividad</th></tr></thead>
+        <table><thead><tr><th>Usuario</th><th>Rol</th><th>Tareas completadas</th><th>Incidencias reportadas</th><th>Seguimientos</th><th>Registros creados</th><th>Última actividad</th></tr></thead>
         <tbody id="usuarios-tbody"></tbody></table>
       </div>
     </div>
@@ -347,15 +358,15 @@ textarea.form-input{resize:vertical;min-height:80px;}
   <button class="bnav-item" onclick="navigate('equipos')"><span class="bnav-icon">🏭</span>Equipos</button>
   <button class="bnav-item" onclick="navigate('tareas')"><span class="bnav-icon">🔧</span>Tareas</button>
   <button class="bnav-item" onclick="navigate('repuestos')"><span class="bnav-icon">📦</span>Stock</button>
-  <button class="bnav-item" onclick="navigate('eventos')"><span class="bnav-icon">📣</span>Eventos</button>
+  <button class="bnav-item" onclick="navigate('eventos')"><span class="bnav-icon">📣</span>Incidencias</button>
 </div>
 </div>
 <div id="modal-container"></div>
 <div id="toast-container"></div>
 <script>
 /* ═══════════════ CONFIGURACIÓN — COMPLETAR ═══════════════ */
-const SUPABASE_URL = 'https://wgoqnoxefgndcjkgjqoj.supabase.co';   // ← Project URL
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indnb3Fub3hlZmduZGNqa2dqcW9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzMzI0MTQsImV4cCI6MjEwNjkwODQxNH0.Qe925OjM83xtJqbEeXLs3Cm7U1Iia_5PIE4FnS7w5hI';                  // ← anon public key
+const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co';   // ← Project URL
+const SUPABASE_ANON_KEY = 'TU-ANON-KEY';                  // ← anon public key
 /* ═══════════════════════════════════════════════════════════ */
 let sb=null;
 const state={equipos:[],tareas:[],repuestos:[],proveedores:[],historial:[],eventos:[],evaluaciones:[],usuarios:[],profile:null,user:null};
@@ -366,6 +377,7 @@ const meName=()=>state.profile?state.profile.nombre:(state.user?state.user.email
 function configured(){return SUPABASE_URL.startsWith('https://')&&!SUPABASE_URL.includes('TU-PROYECTO')&&SUPABASE_ANON_KEY.length>20&&!SUPABASE_ANON_KEY.includes('TU-ANON');}
 /* ═══════════════ ARRANQUE / AUTH ═══════════════ */
 async function boot(){
+  if('serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js');}catch(e){}}
   if(!configured()){document.getElementById('setup-screen').style.display='flex';return;}
   sb=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
   document.getElementById('login-screen').style.display='flex';
@@ -470,7 +482,7 @@ function updateStatusBar(){
     ${p?`<div class="status-pill pill-blue"><div class="pill-dot"></div>${p} próxima${p>1?'s':''}</div>`:''}
     ${ss?`<div class="status-pill pill-red"><div class="pill-dot"></div>${ss} sin stock</div>`:''}
     ${bm?`<div class="status-pill pill-yellow"><div class="pill-dot"></div>${bm} bajo mínimo</div>`:''}
-    ${evAb?`<div class="status-pill pill-red"><div class="pill-dot"></div>${evAb} evento${evAb>1?'s':''}</div>`:''}
+    ${evAb?`<div class="status-pill pill-red"><div class="pill-dot"></div>${evAb} incidencia${evAb>1?'s':''}</div>`:''}
     ${!v&&!u&&!ss&&!evAb?`<div class="status-pill pill-green"><div class="pill-dot"></div>Planta al día</div>`:''}`;
   const now=new Date();
   document.getElementById('status-date').textContent=now.toLocaleDateString('es-AR',{weekday:'short',day:'numeric',month:'short'}).toUpperCase();
@@ -551,7 +563,7 @@ function renderEquipos(){
   }).join('')||`<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🔍</div><div class="empty-title">Sin resultados</div></div>`;
 }
 async function openPhotoUpload(id,table){
-  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.capture='environment';
+  const inp=document.createElement('input');inp.type='file';inp.accept='image/*';
   inp.onchange=async(e)=>{
     const file=e.target.files[0];if(!file)return;
     toast('Subiendo foto...','success');
@@ -614,7 +626,7 @@ function completarTarea(id){
   sigTareaId=id;sigDrawn=false;
   const t=state.tareas.find(x=>x.id===id);if(!t)return;
   const eq=equipoById(t.equipoId);
-  document.getElementById('modal-container').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+  document.getElementById('modal-container').innerHTML=`<div class="modal-overlay"><div class="modal">
     <div class="modal-header"><div class="modal-title">✅ Completar tarea</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
       <div class="alert-card alert-ok" style="margin-bottom:16px"><span class="alert-icon">${tipoIcon(t.tipo)}</span><div class="alert-body"><div class="alert-title">${t.nombre}</div><div class="alert-desc">${eq.code} · ${eq.name}</div></div></div>
@@ -790,7 +802,7 @@ function repsPickerHTML(selIds=[]){
   return state.repuestos.map(r=>`<label><input type="checkbox" class="t-rep-chk" value="${r.id}"${selIds.includes(r.id)?' checked':''}> <span style="font-family:var(--mono);font-size:10px;color:var(--blue)">${r.code}</span> ${r.nombre}</label>`).join('')||'<div style="padding:10px;font-size:12px;color:var(--text3)">Sin repuestos cargados</div>';
 }
 function modalEquipo(d={}){
-  return`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+  return`<div class="modal-overlay"><div class="modal">
     <div class="modal-header"><div class="modal-title">${d.id?'Editar':'Nuevo'} Equipo</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
     <div class="modal-body"><div class="form-grid">
       <div class="form-group"><label class="form-label">Código</label><input class="form-input" id="f-code" value="${d.code||''}" placeholder="EQ-001"></div>
@@ -819,7 +831,7 @@ async function saveEquipo(id){
 function editEquipo(id){openModal('equipo',state.equipos.find(e=>e.id===id)||{});}
 function modalTarea(d={}){
   const selIds=repIds(d);
-  return`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+  return`<div class="modal-overlay"><div class="modal">
     <div class="modal-header"><div class="modal-title">${d.id?'Editar':'Nueva'} Tarea</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
     <div class="modal-body"><div class="form-grid">
       <div class="form-group full"><label class="form-label">Nombre de la tarea</label><input class="form-input" id="t-nombre" value="${d.nombre||''}" placeholder="Lubricación de rodamientos"></div>
@@ -845,7 +857,7 @@ function collectTareaForm(){
 let tmpTareaData=null;
 function openQuickRepuesto(){tmpTareaData=collectTareaForm();openModal('quickrep');}
 function modalQuickRepuesto(){
-  return`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+  return`<div class="modal-overlay"><div class="modal">
     <div class="modal-header"><div class="modal-title">＋ Nuevo repuesto rápido</div><button class="btn btn-sm btn-ghost" onclick="closeModal();if(tmpTareaData)openModal('tarea',tmpTareaData)">✕</button></div>
     <div class="modal-body"><div class="form-grid">
       <div class="form-group"><label class="form-label">Código</label><input class="form-input" id="qr-code" value="REP-${String(state.repuestos.length+1).padStart(3,'0')}" placeholder="REP-013"></div>
@@ -887,7 +899,7 @@ async function saveTarea(id){
 }
 function editTarea(id){openModal('tarea',state.tareas.find(t=>t.id===id)||{});}
 function modalRepuesto(d={}){
-  return`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+  return`<div class="modal-overlay"><div class="modal">
     <div class="modal-header"><div class="modal-title">${d.id?'Editar':'Nuevo'} Repuesto</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
     <div class="modal-body"><div class="form-grid">
       <div class="form-group"><label class="form-label">Código</label><input class="form-input" id="r-code" value="${d.code||''}" placeholder="REP-001"></div>
@@ -918,7 +930,7 @@ async function saveRepuesto(id){
 }
 function editRepuesto(id){openModal('repuesto',state.repuestos.find(r=>r.id===id)||{});}
 function modalProveedor(d={}){
-  return`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
+  return`<div class="modal-overlay"><div class="modal">
     <div class="modal-header"><div class="modal-title">${d.id?'Editar':'Nuevo'} Proveedor</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
     <div class="modal-body"><div class="form-grid">
       <div class="form-group full"><label class="form-label">Nombre de la empresa</label><input class="form-input" id="p-nombre" value="${d.nombre||''}" placeholder="Lubricentro Central"></div>
@@ -927,6 +939,7 @@ function modalProveedor(d={}){
       <div class="form-group"><label class="form-label">Teléfono</label><input class="form-input" id="p-tel" value="${d.tel||''}" placeholder="385-4123456"></div>
       <div class="form-group"><label class="form-label">Lead time (días)</label><input class="form-input" type="number" id="p-lt" value="${d.lt||5}" min="0"></div>
       <div class="form-group full"><label class="form-label">Observaciones</label><textarea class="form-input" id="p-obs">${d.obs||''}</textarea></div>
+      ${auditInfo(d)}
     </div></div>
     <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" onclick="saveProveedor('${d.id||''}')">💾 Guardar</button></div>
   </div></div>`;
@@ -950,7 +963,7 @@ function renderUserChip(){
 }
 function openPerfil(){
   const p=state.profile;
-  document.getElementById('modal-container').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal" style="max-width:420px">
+  document.getElementById('modal-container').innerHTML=`<div class="modal-overlay"><div class="modal" style="max-width:420px">
     <div class="modal-header"><div class="modal-title">👤 Mi Perfil</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
       <div class="form-group" style="margin-bottom:14px"><label class="form-label">Nombre y apellido</label><input class="form-input" id="pf-nombre" value="${p.nombre}" placeholder="Ej: Juan Pérez"></div>
@@ -1009,7 +1022,7 @@ function renderEventos(){
         ${jefeBtns(ev)}
       </div>
     </div>`;
-  }).join('')||`<div class="empty"><div class="empty-icon">📣</div><div class="empty-title">Sin eventos en esta vista</div><div class="empty-sub">Tocá "+ Nuevo Evento" para reportar una parada, problema o hallazgo</div></div>`;
+  }).join('')||`<div class="empty"><div class="empty-icon">📣</div><div class="empty-title">Sin incidencias en esta vista</div><div class="empty-sub">Tocá "+ Nueva Incidencia" para reportar una parada, problema o hallazgo</div></div>`;
 }
 async function uploadPhotos(files,folder,id){
   const urls=[];
@@ -1022,8 +1035,8 @@ async function uploadPhotos(files,folder,id){
 }
 function modalEvento(d={}){
   const selIds=repIds(d);
-  return`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal">
-    <div class="modal-header"><div class="modal-title">${d.id?'Editar':'Nuevo'} Evento</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
+  return`<div class="modal-overlay"><div class="modal">
+    <div class="modal-header"><div class="modal-title">${d.id?'Editar':'Nueva'} Incidencia</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
     <div class="modal-body"><div class="form-grid">
       <div class="form-group full"><label class="form-label">Título del evento</label><input class="form-input" id="e-titulo" value="${d.titulo||''}" placeholder="Ej: Parada de moldeadora por fuga hidráulica"></div>
       <div class="form-group"><label class="form-label">Fecha</label><input class="form-input" type="date" id="e-fecha" value="${d.fecha||today()}"></div>
@@ -1035,7 +1048,7 @@ function modalEvento(d={}){
       <div class="form-group full"><label class="form-label">Repuestos utilizados</label>
         <div class="reps-picker">${repsPickerHTML(selIds).replaceAll('t-rep-chk','e-rep-chk')}</div>
       </div>
-      <div class="form-group full"><label class="form-label">Fotos (máx. 5)</label><input class="form-input" type="file" id="e-fotos" accept="image/*" multiple capture="environment"></div>
+      <div class="form-group full"><label class="form-label">Fotos (máx. 5)</label><input class="form-input" type="file" id="e-fotos" accept="image/*" multiple></div>
     </div></div>
     <div class="modal-footer"><button class="btn btn-secondary" onclick="closeModal()">Cancelar</button><button class="btn btn-primary" id="e-save-btn" onclick="saveEvento('${d.id||''}')">💾 Guardar</button></div>
   </div></div>`;
@@ -1054,7 +1067,7 @@ async function saveEvento(id){
       const {error}=await sb.from('eventos').insert(obj);
       if(error)throw error;
       state.eventos.push(obj);
-      toast('Evento reportado ✅','success');
+      toast('Incidencia reportada ✅','success');
     }else{
       const old=state.eventos.find(e=>e.id===id);
       const nuevas=await uploadPhotos(files,'eventos',id);
@@ -1064,7 +1077,7 @@ async function saveEvento(id){
       const {error}=await sb.from('eventos').update(obj).eq('id',id);
       if(error)throw error;
       Object.assign(old,obj);
-      toast('Evento actualizado ✅','success');
+      toast('Incidencia actualizada ✅','success');
     }
     closeModal();refreshCurrent();
   }catch(err){btn.disabled=false;toast('Error: '+err.message,'error');}
@@ -1072,18 +1085,18 @@ async function saveEvento(id){
 function editEvento(id){openModal('evento',state.eventos.find(e=>e.id===id)||{});}
 async function deleteEvento(id){
   if(!isJefe())return;
-  if(!confirm('¿Eliminar este evento y sus seguimientos?'))return;
+  if(!confirm('¿Eliminar esta incidencia y sus seguimientos?'))return;
   await sb.from('evaluaciones').delete().eq('eventoId',id);
   const {error}=await sb.from('eventos').delete().eq('id',id);
   if(error){toast('Solo el jefe puede borrar ⚠️','error');return;}
-  await loadAll();refreshCurrent();toast('Evento eliminado','success');
+  await loadAll();refreshCurrent();toast('Incidencia eliminada','success');
 }
 function verEvento(id,focoCerrar=false){
   const ev=state.eventos.find(e=>e.id===id);if(!ev)return;
   const eq=ev.equipoId?equipoById(ev.equipoId):null;
   const evals=state.evaluaciones.filter(e=>e.eventoId===id).sort((a,b)=>(b.fecha||'').localeCompare(a.fecha||''));
   const fotos=ev.fotos||[];
-  document.getElementById('modal-container').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal" style="max-width:640px">
+  document.getElementById('modal-container').innerHTML=`<div class="modal-overlay"><div class="modal" style="max-width:640px">
     <div class="modal-header"><div class="modal-title">${ev.tipo}: ${ev.titulo}</div><button class="btn btn-sm btn-ghost" onclick="closeModal()">✕</button></div>
     <div class="modal-body">
       <div class="audit-line" style="margin-bottom:14px">📅 ${fmtDate(ev.fecha)} · 🏭 ${eq&&eq.code?eq.code+' — '+eq.name:'General'} · 📣 Reportado por ${ev.creadoPor||'—'}${ev.creadoEn?' el '+new Date(ev.creadoEn).toLocaleDateString('es-AR'):''}${ev.cerradoPor?` · ✅ Cerrado por ${ev.cerradoPor}`:''}</div>
@@ -1121,7 +1134,7 @@ async function cerrarEvento(id){
   if(error){toast('Error: '+error.message,'error');return;}
   const ev=state.eventos.find(e=>e.id===id);
   if(ev){ev.estado='Cerrado';ev.resultado=resultado;ev.cerradoPor=meName();ev.cerradoEn=new Date().toISOString();}
-  refreshCurrent();closeModal();toast('Evento cerrado ✅','success');
+  refreshCurrent();closeModal();toast('Incidencia cerrada ✅','success');
 }
 async function addEvaluacion(eventoId){
   const nota=document.getElementById('ev-nota').value.trim();
@@ -1143,7 +1156,7 @@ function renderUsuarios(){
   document.getElementById('usuarios-kpis').innerHTML=`
     <div class="kpi-card"><div class="kpi-label">👥 Usuarios</div><div class="kpi-value">${state.usuarios.length}</div><div class="kpi-sub">${state.usuarios.filter(u=>u.rol==='jefe').length} jefe · ${state.usuarios.filter(u=>u.rol!=='jefe').length} operarios</div></div>
     <div class="kpi-card"><div class="kpi-label">✅ Tareas firmadas</div><div class="kpi-value" style="color:var(--green)">${tareasOk}</div><div class="kpi-sub">en el historial</div></div>
-    <div class="kpi-card"><div class="kpi-label">📣 Eventos</div><div class="kpi-value" style="color:var(--orange)">${state.eventos.length}</div><div class="kpi-sub">${state.eventos.filter(e=>e.estado!=='Cerrado').length} abiertos/en curso</div></div>
+    <div class="kpi-card"><div class="kpi-label">📣 Incidencias</div><div class="kpi-value" style="color:var(--orange)">${state.eventos.length}</div><div class="kpi-sub">${state.eventos.filter(e=>e.estado!=='Cerrado').length} abiertos/en curso</div></div>
     <div class="kpi-card"><div class="kpi-label">🔎 Seguimientos</div><div class="kpi-value" style="color:var(--blue)">${state.evaluaciones.length}</div><div class="kpi-sub">evaluaciones posteriores</div></div>`;
   document.getElementById('usuarios-tbody').innerHTML=state.usuarios.map(u=>{
     const n=u.nombre;
